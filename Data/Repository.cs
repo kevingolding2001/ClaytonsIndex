@@ -19,83 +19,20 @@ public class Repository {
             multiResult.AddRange(FuzzySearch(phrase));
         }
 
-        var result = multiResult.OrderBy(a => a.filename).ThenBy(b => b.pagenum).ThenBy(c => c.linenum);
+        var result = multiResult.OrderBy(a => a.issue_num).ThenBy(d => d.sub_issue).ThenBy(b => b.pagenum).ThenBy(c => c.linenum)
+            .GroupBy(g => new { g.filename, g.issue_num, g.sub_issue, g.pagenum, g.basename, g.description})
+            .Select(s => new SearchResult() 
+                {
+                issue_num = s.Key.issue_num, 
+                sub_issue = s.Key.sub_issue, 
+                pagenum = s.Key.pagenum,
+                filename = s.Key.filename,
+                basename = s.Key.basename,
+                description = s.Key.description,
+                context = string.Join("... ", s.Select(c => c.context))
+            });
         return result;
     }
-
-    private List<SearchResult> search(string search_term) {
-        var words = search_term.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
-
-        var allResult = new List<SearchResult>();
-        using (var conn = db.GetConn()) {
-            conn.Open();
-            var sql = @"create temporary table search_result as (select word_index.*, description 
-                            from word_index join file_issues using (filename)
-                            where word = @word)";
-            var comm = conn.CreateCommand();
-            comm.CommandText = sql;
-            comm.Parameters.Add(new MySqlParameter {ParameterName = "@word", Value = words[0]});
-            comm.ExecuteNonQuery();
-
-            var idx = 0;
-            foreach (var nextWord in words.Skip(1)) {
-                idx += 1;
-                var join_sql = @"create temporary table join_result as 
-                            (select search_result.* from search_result
-                                join word_index using (filename)
-                                where word_index.wordnum = search_result.wordnum + @idx
-                                    and word_index.word = @word )";
-                var join_comm = conn.CreateCommand();
-                join_comm.CommandText = join_sql;
-                join_comm.Parameters.Add(new MySqlParameter {ParameterName = "@word", Value = nextWord});
-                join_comm.Parameters.Add(new MySqlParameter {ParameterName = "@idx", Value = idx});
-                join_comm.ExecuteNonQuery();
-
-                var inner_count_sql = "select count(*) from join_result";
-                var inner_count_comm = conn.CreateCommand();
-                inner_count_comm.CommandText = inner_count_sql;
-                var rcount = inner_count_comm.ExecuteReader();
-                rcount.Read();
-                rcount.Close();
-
-                var drop_sql = "drop table search_result";
-                var drop_comm = conn.CreateCommand();
-                drop_comm.CommandText = drop_sql;
-                drop_comm.ExecuteNonQuery();
-
-
-                var rename_sql = "rename table join_result to search_result";
-                var rename_comm = conn.CreateCommand();
-                rename_comm.CommandText = rename_sql;
-                rename_comm.ExecuteNonQuery();
-            }
-
-            var result_sql = "select * from search_result";
-            var result_comm = conn.CreateCommand();
-            result_comm.CommandText = result_sql;
-
-            var reader = result_comm.ExecuteReader();
-            while (reader.Read()) {
-
-                var result = new SearchResult();
-
-                //TODO: Need to call build_context here
-                //orig: result.context = reader[2].ToString();
-                result.context = buildContext(reader[0].ToString(), (int)reader[1]);
-                
-                result.filename = reader[0].ToString();
-                result.basename = Path.GetFileName(result.filename);
-                result.wordnum = (int)reader[1];
-                result.pagenum = (int)reader[3];
-                result.linenum = (int)reader[4];
-                
-                allResult.Add(result);
-            }
-        }
-
-        return allResult;
-    }
-
 
     private List<SearchResult> FuzzySearch(string search_term) {
         var allResult = new List<SearchResult>();
@@ -150,7 +87,7 @@ public class Repository {
                 rename_comm.ExecuteNonQuery();
             }
 
-            var result_sql = @"select search_result.* 
+            var result_sql = @"select search_result.*, issue_num, sub_issue
                                 from search_result join file_issues using (filename)
                                 order by issue_num, sub_issue";
             var result_comm = conn.CreateCommand();
@@ -167,6 +104,8 @@ public class Repository {
                 
                 result.filename = reader[0].ToString();
                 result.basename = Path.GetFileNameWithoutExtension(result.filename);
+                result.issue_num = (int)reader[6];
+                result.sub_issue = (string)reader[7];
                 result.wordnum = (int)reader[1];
                 result.pagenum = (int)reader[3];
                 result.linenum = (int)reader[4];
