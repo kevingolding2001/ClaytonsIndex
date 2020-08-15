@@ -1,0 +1,48 @@
+@namespace ClaytonsWeb2
+@model WordSearch
+@inject Repository repo
+
+@{
+    Layout = "/Views/Newsletter/Layout.cshtml";
+    string kdbase = "http://www.kayakdiary.net/qajaq";
+}
+
+<div id="content" style="overflow:auto">
+@if (@Model.SearchTerm.Length > 0)
+{
+<div class="search_heading">Search results for '@Model.SearchTerm'</div>
+}
+
+<div class="search_entry">
+<form action="/search">
+<input type="text" name="search_term" value="@Model.SearchTerm">
+<input type="submit" value="Search">
+</form>
+</div>
+
+    <div class="productRow">
+    <table width="600" border="0" cellpadding="5">
+    @foreach (var result in repo.multiSearch(@Model.SearchTerm) )
+    {
+        <tr>
+            <td>
+                <p>
+                    <a href="@kdbase/newsletters/@result.filename#page=@result.pagenum" target="_blank">
+                        <img src="@kdbase/images/thumbs/@(result.basename).png">
+                    </a>
+                </p>
+            </td>
+            <td>
+                <p>
+                    <a href="@kdbase/newsletters/@result.filename#page=@result.pagenum" target="_blank">
+                        <b>@result.description - Page @result.pagenum</b>
+                    </a>
+                </p>
+                <p>
+                    @result.context
+                </p>
+            </td>
+        </tr>
+    }
+    </table>
+</div>

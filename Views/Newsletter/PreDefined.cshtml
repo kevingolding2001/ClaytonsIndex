@@ -1,0 +1,25 @@
+@namespace ClaytonsWeb2
+@model PreDefined
+@inject Repository repo
+
+@{
+    Layout = "/Views/Newsletter/Layout.cshtml";
+}
+
+<h1>Predefined searches for @Model.CategoryLabel</h1>
+
+    <table>
+    <tr>
+    @{ var index = 0;}
+    @foreach (var term in repo.presearchList(@Model.CategoryId) )
+    {
+        @if (index != 0 && (index % 5) == 0) {
+            @:</tr>
+            @:<tr>
+        }
+        index++;
+
+        <td><a href="/categorysearch/@term.category_id/@term.search_id">@term.search_label</a></td>
+    }
+    </tr>
+    </table>
