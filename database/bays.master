@@ -1,3 +1,20 @@
+# This file contains the master list of animal types
+# which are mentioned in the newsletters. The purpose
+# of the list is define ready made search terms that
+# can be listed on a web page. The format of the file
+# is two columns separated by a comma. The first column
+# is a label that will be displayed to the end user
+# as a link. The second column represents a search
+# string that will be used to perform a search of the
+# index. The search term can consist of multiple phrases
+# separated by the pipe character (|). The reason for
+# using multiple phrases is to allow for plurals, 
+# abbreviations and mis-spellings. To actually load
+# these into the database, the script load_search.sh
+# should be used which does things like adding sequence
+# numbers and the specified category id. The load_search.sh
+# script will usually be run by the script called 
+# load_all_searches.sh
 Antarctic,Antarctic
 Arctic,Arctic
 Atlantic,Atlantic
