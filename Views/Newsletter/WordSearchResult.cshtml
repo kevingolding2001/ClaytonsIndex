@@ -8,10 +8,6 @@
 }
 
 <div id="content" style="overflow:auto">
-@if (@Model.SearchTerm.Length > 0)
-{
-<div class="search_heading">Search results for '@Model.SearchTerm'</div>
-}
 
 <div class="search_entry">
 <form action="/search">
@@ -39,7 +35,7 @@
                     </a>
                 </p>
                 <p>
-                    @result.context
+                    @Html.Raw(result.context)
                 </p>
             </td>
         </tr>

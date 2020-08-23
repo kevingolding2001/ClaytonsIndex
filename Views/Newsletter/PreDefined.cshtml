@@ -4,6 +4,7 @@
 
 @{
     Layout = "/Views/Newsletter/Layout.cshtml";
+    Model.CategoryLabel = repo.categoryLabel(Model.CategoryId);
 }
 
 <h1>Predefined searches for @Model.CategoryLabel</h1>

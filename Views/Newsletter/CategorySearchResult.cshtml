@@ -8,8 +8,7 @@
     string kdbase = "http://www.kayakdiary.net/qajaq";
 }
 
-<div id="content" style="overflow:auto">
-    <div class="search_heading">Search results for '@ps.search_label'</div>
+<div id="content">
     <div class="back_button"><input type="button" onclick="window.history.back();" 
         Value="Back to search list" /></div>
 
@@ -28,11 +27,11 @@
             <td>
                 <p>
                     <a href="@kdbase/newsletters/@result.filename#page=@result.pagenum" target="_blank">
-                        <b>@result.description - Page @result.pagenum</b>
+                        @result.description - Page @result.pagenum
                     </a>
                 </p>
                 <p>
-                    @result.context
+                    @Html.Raw(result.context)
                 </p>
             </td>
         </tr>

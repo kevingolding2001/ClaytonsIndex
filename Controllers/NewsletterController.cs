@@ -17,7 +17,6 @@ public class NewsletterController : Controller {
     {
         var pd = new PreDefined();
         pd.CategoryId = 1;
-        pd.CategoryLabel = "Islands";
         return View("Views/Newsletter/PreDefined.cshtml", pd);
     }
 
@@ -26,7 +25,6 @@ public class NewsletterController : Controller {
     {
         var pd = new PreDefined();
         pd.CategoryId = 2;
-        pd.CategoryLabel = "Bays";
         return View("Views/Newsletter/PreDefined.cshtml", pd);
     }
 
@@ -35,7 +33,6 @@ public class NewsletterController : Controller {
     {
         var pd = new PreDefined();
         pd.CategoryId = 3;
-        pd.CategoryLabel = "Rivers";
         return View("Views/Newsletter/PreDefined.cshtml", pd);
     }
 
@@ -44,7 +41,6 @@ public class NewsletterController : Controller {
     {
         var pd = new PreDefined();
         pd.CategoryId = 4;
-        pd.CategoryLabel = "Animals";
         return View("Views/Newsletter/PreDefined.cshtml", pd);
     }
 
@@ -53,7 +49,6 @@ public class NewsletterController : Controller {
     {
         var pd = new PreDefined();
         pd.CategoryId = 5;
-        pd.CategoryLabel = "Towns";
         return View("Views/Newsletter/PreDefined.cshtml", pd);
     }
 
@@ -62,7 +57,6 @@ public class NewsletterController : Controller {
     {
         var pd = new PreDefined();
         pd.CategoryId = 6;
-        pd.CategoryLabel = "International locations";
         return View("Views/Newsletter/PreDefined.cshtml", pd);
     }
 

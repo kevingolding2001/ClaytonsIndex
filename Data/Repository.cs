@@ -100,7 +100,7 @@ public class Repository {
 
                 //TODO: Need to call build_context here
                 //orig: result.context = reader[2].ToString();
-                result.context = buildContext(reader[0].ToString(), (int)reader[1]);
+                result.context = buildContext(reader[0].ToString(), (int)reader[1], words);
                 
                 result.filename = reader[0].ToString();
                 result.basename = Path.GetFileNameWithoutExtension(result.filename);
@@ -119,7 +119,7 @@ public class Repository {
     }
 
 
-    public string buildContext(string fileName, int wordNum) {
+    public string buildContext(string fileName, int wordNum, string[] searchWords) {
         //TODO: Dapperize this
         var context = "";
         using (var conn = db.GetConn()) {
@@ -133,14 +133,27 @@ public class Repository {
 
             var reader = comm.ExecuteReader();
             while (reader.Read()) {
+                var addWord = reader[0].ToString();
+                if (searchWords.Contains(addWord, StringComparer.OrdinalIgnoreCase))
+                {
+                    addWord = $"<span class=\"highlighted\">{addWord}</span>";
+                }
                 if (context.Length == 0) {
-                    context = reader[0].ToString();
+                    context = addWord;
                 } else {
-                    context += " " + reader[0].ToString();
+                    context += " " + addWord;
                 }
             }
         }
         return context;
+    }
+
+    public string categoryLabel(int categoryId)
+    {
+        using (var conn = db.GetConn()) {
+            var sql = @"select category_label from presearch_category where category_id = @catid ";
+            return conn.QueryFirstOrDefault<string>(sql, new { catid = categoryId });
+        }
     }
 
     public IEnumerable<presearch> presearchList(int categoryId) {
