@@ -111,5 +111,11 @@ public class NewsletterController : Controller {
         ws.SearchTerm = search_term != null ? search_term : "";
         return View("Views/Newsletter/WordSearchResult.cshtml", ws);
     }
+
+    [HttpGet("/admin/allcategories")]
+    public IActionResult AllCategories()
+    {
+        return View("Views/Admin/Categories.cshtml");
+    }
 }
 }

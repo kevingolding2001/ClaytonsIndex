@@ -4,6 +4,7 @@ using MySql.Data.MySqlClient;
 using System;
 using Dapper;
 using System.IO;
+using ClaytonsWeb2;
 
 public class Repository {
     private DBConn db;
@@ -180,6 +181,13 @@ public class Repository {
         using (var conn = db.GetConn()) {
             var sql = $@"select * from file_issues"; 
             return conn.Query<file_issues>(sql);
+        }
+    }
+
+    public IEnumerable<presearch_category> CategoryList() {
+        using (var conn = db.GetConn()) {
+            var sql = $@"select * from presearch_category"; 
+            return conn.Query<presearch_category>(sql);
         }
     }
 }

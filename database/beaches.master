@@ -1,4 +1,4 @@
-# This file contains the master list of animal types
+# This file contains the master list of beach names
 # which are mentioned in the newsletters. The purpose
 # of the list is define ready made search terms that
 # can be listed on a web page. The format of the file
@@ -15,7 +15,85 @@
 # numbers and the specified category id. The load_search.sh
 # script will usually be run by the script called 
 # load_all_searches.sh
+Abrahams Bosom,Abrahams Bosom Beach
+Adams,Adams Beach
+Afales,Afales Beach
+Aircraft,Aircraft Beach
 Airlie,Airlie Beach
+Awinya,Awinya Beach
+Back,Back Beach
+Banksia,Banksia Beach
+Batemans Bay,Batemans Bay Beach
+Bay’s,Bay’s Beach
+Beach Clarks,Beach Clarks Beach
+Bells,Bells Beach|Bell’s Beach|
+Bernie's,Bernie's Beach
+Blacksand,Blacksand Beach|Blacksands Beach
+Bongaree,Bongaree Beach
+Bradbury,Bradbury Beach|Bradbury’s Beach
+Brighton,Brighton Beach
+Buds,Buds Beach
+Bulcock,Bulcock Beach
+Bullock,Bullock Beach
+Casuarina,Casuarina Beach
+Chalkies,Chalkies Beach|Chalkie's Beach
+Clontarf,Clontarf Beach
+Cobblers,Cobblers Beach
+Colmslie,Colmslie Beach|Colmsie Beach
+Considine,Considine Beach
+Coolum,Coolum Beach
+Corrigans,Corrigans Beach
+Crayfish,Crayfish Beach
+Curlew,Curlew Beach
+Currumbin,Currumbin Beach
+Cylinder,Cylinder Beach
+Denman Steen's,Denman Steen's Beach
+Doppys,Doppys Beach
+Dugong,Dugong Beach
+Fingal,Fingal Beach
+Flinders,Flinders Beach
+Godwin,Godwin Beach
+Golden,Golden Beach
+Horseshoe Bay,Horseshoe Bay Beach
+Joes,Joes Beach|Joe'e Beach|Joe's Beach
+Kings,Kings Beach|King's Beach
+Lighthouse Watego,Lighthouse Watego Beach
+Main,Main Beach
+March,March Beach
+Margate,Margate Beach
+Maroochydore,Maroochydore Beach
+Masthead,Masthead Beach
+Maui,Maui Beach
+Mile,Mile Beach
 Mission,Mission Beach
-Nudgee,Nudgee Beach
+Mitros,Mitros Beach
+Mooloolaba,Mooloolaba Beach
+Morwong,Morwong Beach
+Mudjimba,Mudjimba Beach
+Nail,Nail Beach
+Northmere,Northmere Beach
+Nudgee,Nudgee Beach|Nudgie Beach
+Orchid,Orchid Beach
+Oreti,Oreti Beach
+Palm,Palm Beach
+Queens,Queens Beach|Queen's Beach
 Rainbow,Rainbow Beach
+Ramsay,Ramsay Beach
+Red,Red Beach
+Sarina,Sarina Beach
+Sawmill,Sawmill Beach
+Scarborough,Scarborough Beach
+See Hops,See Hops Beach
+South Sheperd,South Sheperd Beach
+Steens,Steens Beach|Steen's Beach
+Sunset,Sunset Beach
+Suttons,Suttons Beach|Sutton's Beach|Sutton’s Beach
+Tea Tree,Tea Tree Beach
+Thompsons,Thompsons Beach
+Thornton,Thornton Beach
+Turtle,Turtle Beach
+Umina,Umina Beach
+Wellington Point,Wellington Point Beach
+Whitehaven,Whitehaven Beach
+Wonga,Wonga Beach
+Zoe Bay,Zoe Bay Beach

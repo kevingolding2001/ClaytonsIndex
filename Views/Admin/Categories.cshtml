@@ -1,0 +1,18 @@
+@namespace ClaytonsWeb2
+@inject Repository repo
+
+<h1>All the categories</h1>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Label</th>
+        </tr>
+    @foreach (var cat in @repo.CategoryList())
+    {
+        <tr>
+            <td>@cat.category_id</td>
+            <td>@cat.category_label</td>
+        </tr>
+    }
+    </table>
