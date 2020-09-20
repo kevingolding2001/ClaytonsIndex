@@ -4,7 +4,7 @@
 
 @{
     Layout = "/Views/Newsletter/Layout.cshtml";
-    presearch ps = repo.getPresearch(@Model.CategoryId, @Model.SearchId);
+    presearch_list ps = repo.getPresearch(@Model.CategoryId, @Model.SearchId);
     string kdbase = "http://www.kayakdiary.net/qajaq";
 }
 

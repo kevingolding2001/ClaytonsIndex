@@ -1,6 +1,6 @@
 using System;
 
-public class presearch
+public class presearch_list
 {
     public int category_id {get; set;}
     public int search_id {get; set;}

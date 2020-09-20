@@ -1,0 +1,27 @@
+@namespace ClaytonsWeb2
+@model PreSearchListModel
+@inject Repository repo
+
+@{
+    Model.CategoryLabel = repo.categoryLabel(Model.CategoryId);
+}
+
+    <H1>Presearch list for category @Model.CategoryId (@Model.CategoryLabel)</h1>
+
+    <table border="1">
+        <tr>
+            <th>Cat ID</th>
+            <th>Search ID</th>
+            <th>Label</th>
+            <th>SearchTerm</th>
+        </tr>
+    @foreach (var psl in @repo.PresearchList(@Model.CategoryId))
+    {
+        <tr>
+            <td>@psl.category_id</td>
+            <td>@psl.search_id</td>
+            <td>@psl.search_label</td>
+            <td>@psl.search_term</td>
+        </tr>
+    }
+    </table>

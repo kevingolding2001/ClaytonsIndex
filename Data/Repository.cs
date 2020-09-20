@@ -157,22 +157,22 @@ public class Repository {
         }
     }
 
-    public IEnumerable<presearch> presearchList(int categoryId) {
+    public IEnumerable<presearch_list> presearchList(int categoryId) {
         using (var conn = db.GetConn()) {
             //conn.Open();
             var sql = @"select * from presearch_list where category_id = @catid 
                             order by search_label";
-            return conn.Query<presearch>(sql, new { catid = categoryId });
+            return conn.Query<presearch_list>(sql, new { catid = categoryId });
         }
     }
 
-    public presearch getPresearch(int category_id, int search_id) {
+    public presearch_list getPresearch(int category_id, int search_id) {
         using (var conn = db.GetConn()) {
             var sql = $@"select * 
                             from presearch_list 
                             where category_id = @catid
                               and search_id = @sid";
-            return conn.QueryFirstOrDefault<presearch>(sql, new 
+            return conn.QueryFirstOrDefault<presearch_list>(sql, new 
                 { catid = category_id, sid = search_id});
         }
     }
@@ -188,6 +188,16 @@ public class Repository {
         using (var conn = db.GetConn()) {
             var sql = $@"select * from presearch_category"; 
             return conn.Query<presearch_category>(sql);
+        }
+    }
+
+    public IEnumerable<presearch_list> PresearchList(int categoryId)
+    {
+        using (var conn = db.GetConn()) {
+            var sql = $@"select * from presearch_list 
+                            where category_id = @categoryId
+                            order by search_id"; 
+            return conn.Query<presearch_list>(sql, new {categoryId = categoryId});
         }
     }
 }
