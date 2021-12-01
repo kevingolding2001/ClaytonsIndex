@@ -12,10 +12,18 @@ namespace ClaytonsWeb2
         }
 
         [HttpGet("/admin/presearchlist/{category_id}")]
-        public IActionResult AllCategories(int category_id)
+        public IActionResult AllPresearchList(int category_id)
         {
             var model = new PreSearchListModel() {CategoryId = category_id};
             return View("Views/Admin/PresearchListView.cshtml", model);
         }
+
+        [HttpGet("/admin/presearchmaster/{category_id}")]
+        public FileResult AllPresearchMaster(int category_id)
+        {
+            var model = new PreSearchListModel() {CategoryId = category_id};
+            return View("Views/Admin/PresearchListMaster.cshtml", model).ToString();
+        }
+
     }
 }
